@@ -7,10 +7,10 @@ App.Config = {
   audio: {
     // Đường dẫn file âm thanh (đặt file của anh vào assets/audio/ đúng tên này)
     files: {
-      bgmMenu: 'assets/audio/bgm-menu.mp3',   // nhạc nền menu
-      bgmGame: 'assets/audio/bgm-game.mp3',   // nhạc nền khi chơi
+      bgmMenu: 'assets/audio/bgmMenu.mp3',    // nhạc nền menu
+      bgmGame: 'assets/audio/bgmGame.MP3',    // nhạc nền khi chơi
       correct: 'assets/audio/correct.mp3',    // âm thanh trả lời đúng
-      wrong:   'assets/audio/wrong.mp3'       // âm thanh trả lời sai (~4.2s)
+      wrong:   'assets/audio/wrong.MP3'       // âm thanh trả lời sai (~4.2s)
     },
     // Âm lượng từng loại (0 -> 1)
     volumes: { bgmMenu: 0.55, bgmGame: 0.4, correct: 0.9, wrong: 1 },
