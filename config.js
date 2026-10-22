@@ -15,7 +15,7 @@ App.Config = {
     // Âm lượng từng loại (0 -> 1)
     volumes: { bgmMenu: 1, bgmGame: 1, correct: 0.75, wrong: 1 },
     // Âm lượng nhạc nền bị hạ xuống khi âm thanh "sai" đang chạy
-    duckVolume: 0.35
+    duckVolume: 0.15
   },
 
   timing: {
