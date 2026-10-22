@@ -11,6 +11,8 @@
   padding: 16px;
   perspective: 1200px;
   background: rgba(40, 10, 28, 0.6);
+  /* Tràn ra ngoài rìa: khi cả trang thu nhỏ (zoom out nảy) viền ngoài vẫn tối, không lòi nền sáng */
+  box-shadow: 0 0 0 100vmax rgba(40, 10, 28, 0.6);
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
   opacity: 0;
