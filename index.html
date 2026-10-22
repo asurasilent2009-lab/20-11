@@ -4,7 +4,36 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   
-   <link rel="shortcut icon" type="image/gif" href="heart.gif/heart.gif" />
+<script>
+(function () {
+  var link = document.getElementById('favicon');
+  var c = document.createElement('canvas');
+  c.width = c.height = 64;
+  var x = c.getContext('2d');
+  var t = 0;
+
+  function heart(s) {
+    x.clearRect(0, 0, 64, 64);
+    x.save();
+    x.translate(32, 34);
+    x.scale(s, s);
+    x.beginPath();
+    x.moveTo(0, 22);
+    x.bezierCurveTo(-34, -2, -18, -28, 0, -10);
+    x.bezierCurveTo(18, -28, 34, -2, 0, 22);
+    x.fillStyle = '#ec4899';
+    x.fill();
+    x.restore();
+  }
+
+  setInterval(function () {
+    t += 0.25;
+    heart(1 + 0.15 * Math.sin(t));
+    link.type = 'image/png';
+    link.href = c.toDataURL('image/png');
+  }, 120);
+})();
+</script>
 
   <title>Class 12/9 MG | CARD</title>
 
