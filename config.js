@@ -25,7 +25,7 @@ App.Config = {
     answerDelay: 1000,       // ms: hồi hộp chờ trước khi công bố đúng/sai
 
     wrongZoomScale: 1.32,    // độ phóng to khi sai
-    wrongZoomOutAt: 3500,    // ms: tính từ lúc nhạc "sai" bắt đầu, tới lúc zoom out (khoảng 3s -> 4s)
+    wrongZoomOutAt: 3800,    // ms: tính từ lúc nhạc "sai" bắt đầu, tới lúc zoom out (khoảng 3s -> 4s)
     wrongZoomOutDuration: 900 // ms: thời gian zoom out kiểu nảy (bounce)
   }
 };
