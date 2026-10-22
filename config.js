@@ -13,7 +13,7 @@ App.Config = {
       wrong:   'wrong.mp3'       // âm thanh trả lời sai (~4.2s)
     },
     // Âm lượng từng loại (0 -> 1)
-    volumes: { bgmMenu: 1, bgmGame: 1, correct: 0.9, wrong: 1 },
+    volumes: { bgmMenu: 1, bgmGame: 1, correct: 0.75, wrong: 1 },
     // Âm lượng nhạc nền bị hạ xuống khi âm thanh "sai" đang chạy
     duckVolume: 0.05
   },
