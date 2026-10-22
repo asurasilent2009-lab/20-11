@@ -117,24 +117,26 @@ App.Game = (function () {
   }
 
   async function wrongSequence(item, idx) {
-    App.UI.reveal(idx, item.correctIndex);
-    App.UI.setFeedback('Chưa đúng rồi! Câu này giữ trong ống để thử lại sau nhé!', 'bad');
-    App.UI.shakePaper();
-
+    // Đáp án vừa chọn vẫn nhấp nháy "đang chấm" trong lúc nhạc chạy, CHƯA lộ đúng/sai
     App.Audio.duck(true, 200);
     const info = await App.Audio.playWrong();   // chờ tiếng thực sự bắt đầu rồi mới zoom
 
-    // Zoom out vào khoảng giây 3 -> 4; nếu file ngắn hơn thì tự co lại cho khớp
-    let zoomOutAt = T.wrongZoomOutAt;
+    // Giây 3 -> 4 mới lộ đáp án sai (và zoom out); file ngắn hơn thì tự co lại cho khớp
+    let revealAt = T.wrongZoomOutAt;
     if (info.duration) {
-      zoomOutAt = Math.min(zoomOutAt, info.duration * 1000 - T.wrongZoomOutDuration * 0.65);
+      revealAt = Math.min(revealAt, info.duration * 1000 - T.wrongZoomOutDuration * 0.65);
     }
-    zoomOutAt = Math.max(800, zoomOutAt);
+    revealAt = Math.max(800, revealAt);
 
     await App.Effects.wrongZoom({
       scale: T.wrongZoomScale,
-      zoomOutAt: zoomOutAt,
-      bounceMs: T.wrongZoomOutDuration
+      zoomOutAt: revealAt,
+      bounceMs: T.wrongZoomOutDuration,
+      onZoomOut: function () {
+        App.UI.reveal(idx, item.correctIndex);
+        App.UI.setFeedback('Chưa đúng rồi! Câu này giữ trong ống để thử lại sau nhé!', 'bad');
+        App.UI.shakePaper();
+      }
     }).done;
 
     App.Audio.duck(false, 800);
