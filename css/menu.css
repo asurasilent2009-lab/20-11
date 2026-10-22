@@ -1,0 +1,119 @@
+/* ==========================================================
+   MENU: màn hình mở đầu
+   Điểm nhấn duy nhất: tiêu đề rơi xuống từng chữ.
+   Mọi thứ khác nối đuôi hiện ra một lần, mỗi lần vào menu lại chạy lại.
+   ========================================================== */
+.menu-inner {
+  margin: auto;
+  width: 100%;
+  max-width: 520px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  text-align: center;
+  padding: 24px 0;
+}
+
+.menu-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 16px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.88);
+  border: 1px solid var(--rose-200);
+  box-shadow: 0 4px 12px rgba(190, 24, 93, 0.12);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--rose-600);
+}
+.menu-badge .icon { color: var(--rose-500); }
+
+/* ---------- Tiêu đề ---------- */
+.menu-title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(2.8rem, 11vw, 5rem);
+  line-height: 1.15;
+  color: var(--rose-600);
+  text-shadow: 0 3px 0 #fff, 0 10px 22px rgba(190, 24, 93, 0.28);
+}
+.menu-title .word { display: inline-block; white-space: nowrap; margin: 0 0.12em; }
+.menu-title .char { display: inline-block; opacity: 0; }
+
+.screen.is-active .menu-title .char {
+  animation: charDrop 0.85s var(--ease-spring) forwards;
+  animation-delay: calc(0.15s + var(--i) * 0.055s);
+}
+
+@keyframes charDrop {
+  0% { opacity: 0; transform: translateY(-70px) rotate(-10deg) scale(0.6); }
+  55% { opacity: 1; }
+  100% { opacity: 1; transform: none; }
+}
+
+/* ---------- Các phần còn lại ---------- */
+.menu-reveal { opacity: 0; }
+.screen.is-active .menu-reveal {
+  animation: reveal 0.8s var(--ease-out) forwards;
+  animation-delay: var(--d, 0s);
+}
+@keyframes reveal {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: none; }
+}
+
+.menu-sub {
+  max-width: 24em;
+  font-size: 0.95rem;
+  font-weight: 600;
+  line-height: 1.5;
+  color: var(--rose-700);
+}
+
+/* ---------- Ống xăm hero (trang trí, các que thò lên thụt xuống) ---------- */
+.jar--hero {
+  margin: 22px 0 14px;
+  scale: 1.1;
+  animation: sway 4.5s ease-in-out infinite;
+}
+@keyframes sway {
+  0%, 100% { rotate: -2.5deg; }
+  50% { rotate: 2.5deg; }
+}
+.jar--hero .jar-hint { display: none; }
+.jar--hero .stick { animation: peek 3.4s ease-in-out infinite; }
+.jar--hero .stick--1 { animation-delay: 0s; }
+.jar--hero .stick--2 { animation-delay: 0.45s; }
+.jar--hero .stick--3 { animation-delay: 0.9s; }
+.jar--hero .stick--4 { animation-delay: 1.35s; }
+.jar--hero .stick--5 { animation-delay: 1.8s; }
+@keyframes peek {
+  0%, 55%, 100% { translate: 0 0; }
+  28% { translate: 0 -24px; }
+}
+
+/* ---------- Cách chơi ---------- */
+.howto {
+  width: 100%;
+  max-width: 340px;
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid var(--rose-200);
+  border-radius: 16px;
+  padding: 10px 16px;
+  text-align: left;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--plum-soft);
+}
+.howto summary {
+  cursor: pointer;
+  text-align: center;
+  font-weight: 800;
+  color: var(--rose-600);
+  list-style: none;
+}
+.howto summary::-webkit-details-marker { display: none; }
+.howto[open] summary { margin-bottom: 8px; }
+.howto ol { padding-left: 1.2em; display: grid; gap: 6px; line-height: 1.45; }
