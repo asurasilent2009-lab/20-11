@@ -48,12 +48,13 @@ App.Effects = (function () {
     const scale = opts.scale;
     const zoomOutAt = opts.zoomOutAt;
     const bounceMs = opts.bounceMs;
+    const onZoomOut = opts.onZoomOut || function () {};
 
     let resolveFn;
     const done = new Promise(function (r) { resolveFn = r; });
 
     if (reduceMotion.matches) {
-      setTimeout(resolveFn, zoomOutAt);
+      setTimeout(function () { onZoomOut(); resolveFn(); }, zoomOutAt);
       return { done: done, cancel: function () {} };
     }
 
@@ -64,23 +65,26 @@ App.Effects = (function () {
       { transform: 'scale(' + scale + ')' }
     ], { duration: zoomOutAt, fill: 'forwards' });
 
-    const fl = flash.animate([
-      { opacity: 0 },
-      { opacity: 1, offset: 0.06 },
-      { opacity: 0.5, offset: 0.55 },
-      { opacity: 0 }
-    ], { duration: zoomOutAt + bounceMs, easing: 'ease-out' });
-
-    active = { anims: [zin, fl], resolve: resolveFn };
+    active = { anims: [zin], resolve: resolveFn };
 
     zin.onfinish = function () {
+      // Đúng lúc này: lộ đáp án sai + chớp viền đỏ + zoom out nảy
+      onZoomOut();
+
       const zout = stage.animate([
         { transform: 'scale(' + scale + ')', easing: 'cubic-bezier(0.3, 0, 0.4, 1)' },
-        { transform: 'scale(0.92)', offset: 0.38, easing: 'ease-in-out' },
-        { transform: 'scale(1.035)', offset: 0.66, easing: 'ease-in-out' },
+        { transform: 'scale(0.95)', offset: 0.38, easing: 'ease-in-out' },
+        { transform: 'scale(1.03)', offset: 0.66, easing: 'ease-in-out' },
         { transform: 'scale(0.992)', offset: 0.86, easing: 'ease-in-out' },
         { transform: 'scale(1)' }
       ], { duration: bounceMs });
+
+      const fl = flash.animate([
+        { opacity: 0 },
+        { opacity: 1, offset: 0.12 },
+        { opacity: 0 }
+      ], { duration: bounceMs + 500, easing: 'ease-out' });
+
       zin.cancel();
       if (active) active.anims = [zout, fl];
       zout.onfinish = function () {
