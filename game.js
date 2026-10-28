@@ -1,6 +1,6 @@
 /* ==========================================================
    GAME: luật chơi và luồng điều khiển
-   rút xăm -> mở tờ xăm -> chọn đáp án -> hồi hộp -> đúng / sai
+   rút xăm -> mở tờ xăm -> chọn đáp án -> hồi hộp -> đúng / sai hihi
    ========================================================== */
 window.App = window.App || {};
 
